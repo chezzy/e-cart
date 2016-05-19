@@ -4,23 +4,9 @@ require_once 'autoload.php';
 
 use App\Cart;
 
-echo 'Create cart' . PHP_EOL;
+$storage = new \App\storage\SessionStorage('cart');
+$cart = new Cart($storage);
 
-$cart = new Cart();
-print_r($cart->getItems());
+$cart->add(5, 6, 100);
 
-echo 'Add item' . PHP_EOL;
-
-$cart->add(5, 6, 111);
-$cart->add(7, 12, 99);
-print_r($cart->getItems());
-
-echo 'Remove item' . PHP_EOL;
-
-$cart->remove(5);
-print_r($cart->getItems());
-
-echo 'Clear' . PHP_EOL;
-
-$cart->clear();
-print_r($cart->getItems());
+echo $cart->getCost() . PHP_EOL;
