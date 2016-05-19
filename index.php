@@ -11,8 +11,8 @@ print_r($cart->getItems());
 
 echo 'Add item' . PHP_EOL;
 
-$cart->add(5, 6);
-$cart->add(7, 12);
+$cart->add(5, 6, 111);
+$cart->add(7, 12, 99);
 print_r($cart->getItems());
 
 echo 'Remove item' . PHP_EOL;

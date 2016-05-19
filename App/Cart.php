@@ -16,10 +16,10 @@ class Cart
         return $this->items;
     }
 
-    public function add($id, $count)
+    public function add($id, $count, $price)
     {
-        $current = isset($this->items[$id]) ? $this->items[$id] : 0;
-        $this->items[$id] = $current + $count;
+        $current = isset($this->items[$id]) ? $this->items[$id]->getCount() : 0;
+        $this->items[$id] = new CartItem($id, $current + $count, $price);
         $this->saveItems();
     }
 
@@ -35,6 +35,15 @@ class Cart
     {
         $this->items = [];
         $this->saveItems();
+    }
+
+    public function getCost()
+    {
+        $cost = 0;
+        foreach ($this->items as $item) {
+            $cost += $item->getCost();
+        }
+        return $cost;
     }
 
     protected function loadItems()
