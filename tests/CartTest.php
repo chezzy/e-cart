@@ -2,6 +2,7 @@
 require_once realpath(__DIR__ . '/../autoload.php');
 
 use App\Cart;
+use App\cost\SimpleCost;
 use App\storage\StorageInterface;
 
 class MemoryStorage implements StorageInterface
@@ -23,7 +24,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->cart = new Cart(new MemoryStorage());
+        $this->cart = new Cart(new MemoryStorage(), new SimpleCost());
         parent::setUp();
     }
 
