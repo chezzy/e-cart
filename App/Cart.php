@@ -2,16 +2,19 @@
 
 namespace App;
 
+use App\cost\CalculatorInterface;
 use App\storage\StorageInterface;
 
 class Cart
 {
     private $items = [];
     private $storage;
+    private $calculator;
 
-    public function __construct(StorageInterface $storage)
+    public function __construct(StorageInterface $storage, CalculatorInterface $calculator)
     {
         $this->storage = $storage;
+        $this->calculator = $calculator;
         $this->loadItems();
     }
 
@@ -43,11 +46,7 @@ class Cart
 
     public function getCost()
     {
-        $cost = 0;
-        foreach ($this->items as $item) {
-            $cost += $item->getCost();
-        }
-        return $cost;
+        return $this->calculator->getCost($this->items);
     }
 
     protected function loadItems()
