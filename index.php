@@ -6,11 +6,13 @@ use App\Cart;
 use App\cost\SimpleCost;
 use App\storage\SessionStorage;
 use App\cost\BirthdayCost;
+use App\cost\FridayCost;
 
 $storage = new SessionStorage('cart');
 
 $calculator = new SimpleCost();
 $calculator = new BirthdayCost($calculator, 10, date('Y-m-d'), date('Y-m-d'));
+$calculator = new FridayCost($calculator, 5, date('Y-m-d'));
 
 $cart = new Cart($storage, $calculator);
 
